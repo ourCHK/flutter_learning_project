@@ -1,7 +1,24 @@
 import 'package:flutter/material.dart';
 
+import 'entry.dart';
+
 void main() {
-  runApp(const MyApp());
+  runApp(const MyLearningApp());
+}
+
+class MyLearningApp extends StatelessWidget {
+  const MyLearningApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: "FlutterLearningApp",
+      theme: ThemeData(
+
+      ),
+      home: Entry(),
+    );
+  }
 }
 
 class MyApp extends StatelessWidget {
