@@ -45,10 +45,8 @@ class _ThemeChangePageState extends State<ThemeChangePage> {
                       width: 300,
                       height: 300,
                       child: Center(
-                          child: DecoratedBox(
-                        decoration: BoxDecoration(color: Colors.white),
-                        child: Text("This is the card!"),
-                      ))),
+                          child: Text("This is the card!",style: TextStyle(color: Colors.white)),
+                      )),
                 ))
               ],
             ),
