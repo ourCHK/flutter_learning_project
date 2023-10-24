@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_learning_project/localization/custom_localization.dart';
 import 'package:flutter_learning_project/model/localization_model.dart';
-import 'package:flutter_learning_project/theme/theme_config.dart';
 import 'package:provider/provider.dart';
+import '../l10n/auto_gen/app_localizations.dart';
 
 class LocalizationPage extends StatefulWidget {
   const LocalizationPage({super.key});
@@ -28,6 +28,7 @@ class _LocalizationPageState extends State<LocalizationPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            Text(AppLocalizations.of(context)!.helloWorld),
             ElevatedButton(
                 onPressed: (){
                   changeLanguage(languageProvider);
