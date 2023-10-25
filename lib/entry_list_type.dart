@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_learning_project/page/custom_check_box.dart';
 import 'package:flutter_learning_project/page/custom_paint_page.dart';
 import 'package:flutter_learning_project/page/custom_provider_page.dart';
 import 'package:flutter_learning_project/page/inherited_widget_page.dart';
@@ -13,6 +14,7 @@ enum EntryListType {
   changeLanguageTest,
   subPage,
   customPaintTest,
+  customRenderBox
 }
 
 extension EntryListTypeExtension on EntryListType {
@@ -34,6 +36,8 @@ extension EntryListTypeExtension on EntryListType {
         return const SubPage();
       case EntryListType.customPaintTest:
         return const CustomPaintPage();
+      case EntryListType.customRenderBox:
+        return const CustomRenderBoxPage();
     }
   }
 }
