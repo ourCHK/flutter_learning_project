@@ -5,6 +5,7 @@ import 'package:flutter_learning_project/page/custom_provider_page.dart';
 import 'package:flutter_learning_project/page/inherited_widget_page.dart';
 import 'package:flutter_learning_project/page/localization_page.dart';
 import 'package:flutter_learning_project/page/theme_change_page.dart';
+import 'package:flutter_learning_project/page/touch_event_page.dart';
 import 'package:flutter_learning_sub_project/page/sub_page.dart';
 
 enum EntryListType {
@@ -14,7 +15,8 @@ enum EntryListType {
   changeLanguageTest,
   subPage,
   customPaintTest,
-  customRenderBox
+  customRenderBox,
+  touchEventTest,
 }
 
 extension EntryListTypeExtension on EntryListType {
@@ -38,6 +40,8 @@ extension EntryListTypeExtension on EntryListType {
         return const CustomPaintPage();
       case EntryListType.customRenderBox:
         return const CustomRenderBoxPage();
+      case EntryListType.touchEventTest:
+        return const TouchEventPage();
     }
   }
 }
