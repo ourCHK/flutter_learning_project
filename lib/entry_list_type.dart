@@ -3,12 +3,15 @@ import 'package:flutter_learning_project/page/custom_check_box.dart';
 import 'package:flutter_learning_project/page/custom_paint_page.dart';
 import 'package:flutter_learning_project/page/custom_provider_page.dart';
 import 'package:flutter_learning_project/page/custom_touch_event_page.dart';
+import 'package:flutter_learning_project/page/go_router_page.dart';
 import 'package:flutter_learning_project/page/inherited_widget_page.dart';
 import 'package:flutter_learning_project/page/localization_page.dart';
+import 'package:flutter_learning_project/page/login_test_page.dart';
 import 'package:flutter_learning_project/page/notification_page.dart';
 import 'package:flutter_learning_project/page/theme_change_page.dart';
 import 'package:flutter_learning_project/page/touch_event_page.dart';
 import 'package:flutter_learning_sub_project/page/sub_page.dart';
+import 'package:go_router/go_router.dart';
 
 enum EntryListType {
   inheritedWidgetTest,
@@ -20,15 +23,14 @@ enum EntryListType {
   customRenderBox,
   touchEventTest,
   notificationTest,
-  customTouchEventTest
+  customTouchEventTest,
+  goRouterPage,
+  loginPage
 }
 
 extension EntryListTypeExtension on EntryListType {
-  String get pageName {
-    return name;
-  }
 
-  Widget get pageWidget {
+  Widget getPageWidget(BuildContext context, GoRouterState goRouterState) {
     switch (this) {
       case EntryListType.inheritedWidgetTest:
         return const InheritedWidgetPage();
@@ -50,6 +52,10 @@ extension EntryListTypeExtension on EntryListType {
         return const MyNotificationPage();
       case EntryListType.customTouchEventTest:
         return const CustomTouchEventPage();
+      case EntryListType.goRouterPage:
+        return GoRouterPage(goRouterState: goRouterState);
+      case EntryListType.loginPage:
+        return LoginPage(goRouterState: goRouterState,);
     }
   }
 }
