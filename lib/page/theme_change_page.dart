@@ -1,31 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_learning_project/providers/config_provider.dart';
 import 'package:flutter_learning_project/theme/theme_config.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class ThemeChangePage extends StatefulWidget {
+
+class ThemeChangePage extends StatelessWidget {
   const ThemeChangePage({super.key});
 
   @override
-  State createState() {
-    return _ThemeChangePageState();
-  }
-}
-
-class _ThemeChangePageState extends State<ThemeChangePage> {
-  int whichTheme = 0;
-
-  late ThemeData themeData;
-
-  @override
-  void initState() {
-    super.initState();
-    themeData = ThemeData();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    return Theme(
-        data: ThemeConfig.themeList[whichTheme],
-        child: Scaffold(
+    return Consumer(
+      builder: (context, ref, child) {
+        var theme = ref.watch(themeProvider);
+        var themeIndex = ThemeConfig.getThemeIndex(theme);
+        return Scaffold(
           appBar: AppBar(title: const Text("ThemeChangePage")),
           body: Center(
             child: Column(
@@ -36,7 +24,7 @@ class _ThemeChangePageState extends State<ThemeChangePage> {
                 ),
                 Padding(
                     padding: const EdgeInsets.symmetric(vertical: 10),
-                    child: renderColorChip()),
+                    child: renderColorChip(themeIndex,ref)),
                 Card(
                     child: InkWell(
                   splashColor: Colors.limeAccent,
@@ -45,21 +33,24 @@ class _ThemeChangePageState extends State<ThemeChangePage> {
                       width: 300,
                       height: 300,
                       child: Center(
-                          child: Text("This is the card!",style: TextStyle(color: Colors.white)),
+                        child: Text("This is the card!",
+                            style: TextStyle(color: Colors.white)),
                       )),
                 ))
               ],
             ),
           ),
-        ));
+        );
+      },
+    );
   }
 
-  Widget renderColorChip() {
+  Widget renderColorChip(int which, WidgetRef ref) {
     List<Widget> children = [];
     for (int i = 0; i < ThemeConfig.themeList.length; i++) {
       var color = ThemeConfig.themeList[i].primaryColor;
       Widget child;
-      if (i == whichTheme) {
+      if (i == which) {
         child = Container(
             width: 50,
             height: 50,
@@ -73,7 +64,7 @@ class _ThemeChangePageState extends State<ThemeChangePage> {
         );
       }
       children.add(GestureDetector(
-        onTap: () => tapColor(i),
+        onTap: () => tapColor(i,ref),
         child: child,
       ));
     }
@@ -84,19 +75,8 @@ class _ThemeChangePageState extends State<ThemeChangePage> {
     );
   }
 
-  tapColor(int which) {
-    setState(() {
-      whichTheme = which;
-    });
+  tapColor(int which, WidgetRef ref) {
+    ref.read(themeProvider.notifier).changeTheme(ThemeConfig.themeList[which]);
   }
 
-  changeTheme() {
-    setState(() {
-      themeData = ThemeData(
-        colorSchemeSeed: Color(0xffff00b7),
-        // primaryColor: Colors.amberAccent,
-        // primarySwatch: Colors.green,
-      );
-    });
-  }
 }

@@ -1,10 +1,12 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_learning_project/model/activity_model.dart';
 import 'package:flutter_learning_project/model/todo_model.dart';
 import 'package:flutter_learning_project/providers/notifier/custom_async_notify.dart';
 import 'package:flutter_learning_project/providers/notifier/custom_auto_dispose_notify.dart';
 import 'package:flutter_learning_project/providers/notifier/language_notify.dart';
 import 'package:flutter_learning_project/providers/notifier/listen_notify.dart';
+import 'package:flutter_learning_project/providers/notifier/theme_nofity.dart';
 import 'package:flutter_learning_project/providers/notifier/todo_notify.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -42,7 +44,12 @@ final combineAsyncProvider = FutureProvider<String>((ref) async {
 });
 
 
+///语言的provider
 final languageProvider = NotifierProvider<LanguageNotify,String>(()=>LanguageNotify());
+
+
+///主题的provider
+final themeProvider = NotifierProvider<ThemeNotify,ThemeData>(()=>ThemeNotify());
 
 final httpProvider = FutureProvider.autoDispose((ref) async {
   final dio = Dio();

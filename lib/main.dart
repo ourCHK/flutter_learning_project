@@ -53,10 +53,11 @@ class _MyRouteState extends State<MyRouterApp> {
   Widget build(BuildContext context) {
     return Consumer(builder: (context, ref, child) {
       var language = ref.watch(languageProvider);
+      var theme = ref.watch(themeProvider);
       return MaterialApp.router(
         routerConfig: _route,
         title: "FlutterLearningApp",
-        theme: ThemeData(),
+        theme: theme,
         localizationsDelegates: [
           ...GlobalMaterialLocalizations.delegates,
           AppLocalizations.delegate,
