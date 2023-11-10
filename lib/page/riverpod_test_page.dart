@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_learning_project/model/activity_model.dart';
 import 'package:flutter_learning_project/providers/config_provider.dart';
@@ -11,12 +13,34 @@ class RiverpodTestPage extends ConsumerStatefulWidget {
 }
 
 class _RiverpodTestState extends ConsumerState<RiverpodTestPage> {
+
+  int? pre;
+  int? cur;
+
+  late Random random;
+
+
+  @override
+  void initState() {
+    random = Random();
+  }
+
   @override
   Widget build(BuildContext context) {
     final simpleProviderValue = ref.watch(simpleProvider);
     final simpleFamilyProviderValue = ref.watch(simpleFamilyProvider(1));
     final simpleFamilyProviderValue2 = ref.watch(simpleFamilyProvider(2));
     final simpleFamilyProviderRecordsValue = ref.watch(simpleRecordsFamilyProvider((a:1,b:2)));
+
+    //使用listen只会回调监听，但是并不会刷新页面,所以我们需要使用setState
+    ref.listen(listenProvider,(preValue,curValue) {
+      pre = preValue;
+      cur = curValue;
+      setState(() {
+
+      });
+    });
+
 
     final combineAsyncProviderValue = ref.watch(combineAsyncProvider);
 
@@ -38,8 +62,8 @@ class _RiverpodTestState extends ConsumerState<RiverpodTestPage> {
             Text("simpleFamilyProviderRecordsValue:$simpleFamilyProviderRecordsValue"),
             renderCombineAsyncProvider(combineAsyncProviderValue),
             renderSimpleProvider(asyncProviderValue),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+            Wrap(
+              alignment: WrapAlignment.center,
               children: [
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 8.0),
@@ -60,7 +84,10 @@ class _RiverpodTestState extends ConsumerState<RiverpodTestPage> {
             ElevatedButton(onPressed: (){
               ref.watch(simpleAutoDisposeAsyncProvider.notifier).changeValue("I put data into it! and will auto dispose after leave page");
             }, child: const Text("click to get the auto dispose async value")),
-
+            Text("PreValue:$pre and CurValue:$cur"),
+            ElevatedButton(onPressed: (){
+              ref.read(listenProvider.notifier).increase(random.nextInt(10));
+            }, child: Text("click to add Value"))
             // ElevatedButton(
             //     onPressed: () {
             //       print(ref.watch(httpProvider).value!.activity);

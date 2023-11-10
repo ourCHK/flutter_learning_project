@@ -4,6 +4,7 @@ import 'package:flutter_learning_project/model/todo_model.dart';
 import 'package:flutter_learning_project/providers/notifier/custom_async_notify.dart';
 import 'package:flutter_learning_project/providers/notifier/custom_auto_dispose_notify.dart';
 import 'package:flutter_learning_project/providers/notifier/language_notify.dart';
+import 'package:flutter_learning_project/providers/notifier/listen_notify.dart';
 import 'package:flutter_learning_project/providers/notifier/todo_notify.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -25,6 +26,8 @@ final simpleAsyncProvider = AsyncNotifierProvider<CustomAsyncNotify,String>(()=>
 ///简单异步自动取消订阅
 final simpleAutoDisposeAsyncProvider = AutoDisposeAsyncNotifierProvider<CustomAutoDisposeNotify,String>(()=> CustomAutoDisposeNotify());
 
+///监听数据变化的provider
+final listenProvider = NotifierProvider<ListenNotify,int>(()=>ListenNotify());
 
 final combineSubAsyncProvider1 = FutureProvider<String>((ref) async {
   await Future.delayed(const Duration(seconds: 2));

@@ -3,6 +3,7 @@ import 'package:flutter_learning_project/page/custom_check_box.dart';
 import 'package:flutter_learning_project/page/custom_paint_page.dart';
 import 'package:flutter_learning_project/page/custom_provider_page.dart';
 import 'package:flutter_learning_project/page/custom_touch_event_page.dart';
+import 'package:flutter_learning_project/page/flutter_toast_page.dart';
 import 'package:flutter_learning_project/page/go_router_page.dart';
 import 'package:flutter_learning_project/page/inherited_widget_page.dart';
 import 'package:flutter_learning_project/page/localization_page.dart';
@@ -27,7 +28,8 @@ enum EntryListType {
   customTouchEventTest,
   goRouterPage,
   loginPage,
-  riverpodPage
+  riverpodPage,
+  toastPage
 }
 
 extension EntryListTypeExtension on EntryListType {
@@ -60,6 +62,8 @@ extension EntryListTypeExtension on EntryListType {
         return LoginPage(goRouterState: goRouterState);
       case EntryListType.riverpodPage:
         return RiverpodTestPage();
+      case EntryListType.toastPage:
+        return FlutterToastPage();
     }
   }
 }
