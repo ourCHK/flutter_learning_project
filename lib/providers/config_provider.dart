@@ -4,6 +4,7 @@ import 'package:flutter_learning_project/model/activity_model.dart';
 import 'package:flutter_learning_project/model/todo_model.dart';
 import 'package:flutter_learning_project/providers/notifier/custom_async_notify.dart';
 import 'package:flutter_learning_project/providers/notifier/custom_auto_dispose_notify.dart';
+import 'package:flutter_learning_project/providers/notifier/error_notify.dart';
 import 'package:flutter_learning_project/providers/notifier/language_notify.dart';
 import 'package:flutter_learning_project/providers/notifier/listen_notify.dart';
 import 'package:flutter_learning_project/providers/notifier/theme_nofity.dart';
@@ -59,3 +60,6 @@ final httpProvider = FutureProvider.autoDispose((ref) async {
 });
 
 final todoProvider = AutoDisposeAsyncNotifierProvider<TodoNotify,List<Todo>>(()=>TodoNotify());
+
+///简单同步provider
+final errorProvider = NotifierProvider<ErrorNotify,String>(() => ErrorNotify());
