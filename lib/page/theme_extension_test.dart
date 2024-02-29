@@ -23,21 +23,10 @@ class ThemeExtensionPage extends StatelessWidget {
                 const Text(
                   "Hello,This is the text with theme!",
                 ),
+                const ColorWidget(),
                 Padding(
                     padding: const EdgeInsets.symmetric(vertical: 10),
                     child: renderColorChip(themeIndex,ref)),
-                Card(
-                    child: InkWell(
-                      splashColor: Colors.limeAccent,
-                      onTap: () {},
-                      child: const SizedBox(
-                          width: 300,
-                          height: 300,
-                          child: Center(
-                            child: Text("This is the card!",
-                                style: TextStyle(color: Colors.white)),
-                          )),
-                    ))
               ],
             ),
           ),
@@ -80,4 +69,44 @@ class ThemeExtensionPage extends StatelessWidget {
     ref.read(themeProvider.notifier).changeTheme(ThemeConfig.themeList[which]);
   }
 
+}
+
+class ColorWidget extends StatelessWidget {
+
+  final Color? color;
+  const ColorWidget({super.key,this.color});
+
+  @override
+  Widget build(BuildContext context) {
+    var colorExtension = Theme.of(context).extension<ColorExtension>();
+    return Container(
+      alignment: Alignment.center,
+      color: color ?? colorExtension?.color,
+      height: 100,
+      width: 100,
+      child: const Text("Color Widget",style: TextStyle(color: Colors.black)),
+    );
+  }
+}
+
+class ColorExtension extends ThemeExtension<ColorExtension> {
+
+  Color color;
+
+  ColorExtension(this.color);
+
+  //重写复制的方法
+  @override
+  ThemeExtension<ColorExtension> copyWith({Color? newColor}) {
+    return ColorExtension(newColor ?? color);
+  }
+
+  //重写颜色变化时的动画切换
+  @override
+  ThemeExtension<ColorExtension> lerp(covariant ThemeExtension<ColorExtension>? other, double t) {
+    if (other is! ColorExtension) {
+      return this;
+    }
+    return ColorExtension(Color.lerp(color, other.color, t)!);
+  }
 }
