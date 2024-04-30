@@ -25,16 +25,34 @@ final GoRouter _route = GoRouter(
     GoRoute(
         path: "/",
         builder: (context, state) => const Entry(),
+        // pageBuilder: (context, goRouteState) {
+        //   return CustomTransitionPage<void>(
+        //       child: page.getPageWidget(context, goRouteState),
+        //       transitionsBuilder:
+        //           (context, animation, secondaryAnimation, child) {
+        //         //增加动画切换，目前暂时先这样使用，后续统一起来
+        //         const begin = Offset(1.0, 0.0);
+        //         const end = Offset.zero;
+        //         const curve = Curves.ease;
+        //         var tween = Tween(begin: begin, end: end)
+        //             .chain(CurveTween(curve: curve));
+        //         return SlideTransition(
+        //           position: animation.drive(tween),
+        //           child: child,
+        //         );
+        //       });
+        // },
         routes: Entry.routes,
-        redirect: (context, state) {
-          print("${state.fullPath}");
-          if (!AppGlobal.isLogin &&
-              state.fullPath != null &&
-              state.fullPath!.contains("goRouterPage")) {
-            return "/LoginPage?prePath=${state.uri.path}";
-          }
-          return null;
-        }),
+        // redirect: (context, state) {
+        //   print("${state.fullPath}");
+        //   if (!AppGlobal.isLogin &&
+        //       state.fullPath != null &&
+        //       state.fullPath!.contains("goRouterPage")) {
+        //     return "/LoginPage?prePath=${state.uri.path}";
+        //   }
+        //   return null;
+        // }
+        ),
   ],
   navigatorKey: AppGlobal.navigatorKey,
 );

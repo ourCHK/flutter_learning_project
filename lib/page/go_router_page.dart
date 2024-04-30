@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
+import '../entry_list_type.dart';
+
 class GoRouterPage extends StatefulWidget {
 
   final String? params1;
@@ -29,7 +31,10 @@ class _GoRouterState extends State<GoRouterPage> {
         child: Column(
           children: [
             Text("This is the Params1:${widget.params1}"),
-            Text("This is the Params2:${widget.params2}")
+            Text("This is the Params2:${widget.params2}"),
+            ElevatedButton(onPressed: (){
+              context.go("/${EntryListType.loginPage.name}");
+            }, child: Text("go login"))
           ],
         ),
       ),

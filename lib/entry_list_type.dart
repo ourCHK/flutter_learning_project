@@ -11,8 +11,10 @@ import 'package:flutter_learning_project/page/inherited_widget_page.dart';
 import 'package:flutter_learning_project/page/lifecycle_test_page.dart';
 import 'package:flutter_learning_project/page/localization_page.dart';
 import 'package:flutter_learning_project/page/login_test_page.dart';
+import 'package:flutter_learning_project/page/multi_flavors_page.dart';
 import 'package:flutter_learning_project/page/notification_page.dart';
 import 'package:flutter_learning_project/page/riverpod_test_page.dart';
+import 'package:flutter_learning_project/page/scroll_aware_image_test_page.dart';
 import 'package:flutter_learning_project/page/theme_change_page.dart';
 import 'package:flutter_learning_project/page/theme_extension_test.dart';
 import 'package:flutter_learning_project/page/touch_event_page.dart';
@@ -37,12 +39,18 @@ enum EntryListType {
   riverpodPage,
   errorRiverpodPage,
   toastPage,
-  customScrollViewPage
+  customScrollViewPage,
+  scrollAwareImagePage,
+  multiFlavorsPage
 }
 
 extension EntryListTypeExtension on EntryListType {
   Widget getPageWidget(BuildContext context, GoRouterState goRouterState) {
     switch (this) {
+      case EntryListType.multiFlavorsPage:
+        return const MultiFlavorsPage();
+      case EntryListType.scrollAwareImagePage:
+        return const ScrollAwareImageTestPage();
       case EntryListType.themeExtensionTest:
         return const ThemeExtensionPage();
       case EntryListType.lifeCycleTest:

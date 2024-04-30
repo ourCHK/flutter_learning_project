@@ -58,6 +58,22 @@ android {
             signingConfig signingConfigs.debug
         }
     }
+
+    flavorDimensions = ["version"]
+
+    productFlavors {
+        demo {
+            dimension = "version"
+            applicationId = "com.chk.flutter_learning_project.demo"
+            resValue "string", "app_label", "FlutterLearningProjectDemo"
+        }
+        full {
+            dimension = "version"
+            applicationId = "com.chk.flutter_learning_project.full"
+            resValue "string","app_label","FlutterLearningProjectFull"
+        }
+    }
+
 }
 
 flutter {

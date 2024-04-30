@@ -74,6 +74,12 @@ flutter:
 
   assets:
     - images/
+    - path: images/demo/
+      flavors:
+        - demo
+    - path: images/full/
+      flavors:
+        - full
 
   # To add assets to your application, add an assets section, like this:
   # assets:
