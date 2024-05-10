@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_learning_project/page/camera_usage_page.dart';
 import 'package:flutter_learning_project/page/custom_check_box.dart';
 import 'package:flutter_learning_project/page/custom_paint_page.dart';
 import 'package:flutter_learning_project/page/custom_provider_page.dart';
@@ -22,6 +23,7 @@ import 'package:flutter_learning_sub_project/page/sub_page.dart';
 import 'package:go_router/go_router.dart';
 
 enum EntryListType {
+  cameraTest,
   themeExtensionTest,
   lifeCycleTest,
   inheritedWidgetTest,
@@ -47,6 +49,8 @@ enum EntryListType {
 extension EntryListTypeExtension on EntryListType {
   Widget getPageWidget(BuildContext context, GoRouterState goRouterState) {
     switch (this) {
+      case EntryListType.cameraTest:
+        return const CameraUsagePage();
       case EntryListType.multiFlavorsPage:
         return const MultiFlavorsPage();
       case EntryListType.scrollAwareImagePage:
